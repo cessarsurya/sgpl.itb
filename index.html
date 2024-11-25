@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Shield Parameter Calculator with Math Symbols">
+    <title>Shield Parameter Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Include MathJax for Mathematical Symbols -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌊 Shield Parameter Calculator 🌊</h1>
+            <p>Analyze sediment stability, erosion, and deposition risks.</p>
+        </header>
+
+        <main>
+            <!-- Input Parameters -->
+            <div class="card input-card">
+                <h2>Input Parameters</h2>
+                <form id="shield-form">
+                    <div class="form-group">
+                        <label for="density-water">🌊 Water Density (\( \rho \)) [kg/m³]:</label>
+                        <input type="number" id="density-water" value="1025" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="density-sediment">🪨 Sediment Density (\( \rho_s \)) [kg/m³]:</label>
+                        <input type="number" id="density-sediment" value="2650" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="diameter">⚙️ Sediment Diameter (\( d_{50} \)) [m]:</label>
+                        <input type="number" id="diameter" value="0.005" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="viscosity">💧 Kinematic Viscosity (\( \nu \)) [m²/s]:</label>
+                        <input type="number" id="viscosity" value="0.000001" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="z">📏 Height from seabed (\( z \)) [m]:</label>
+                        <input type="number" id="z" value="10" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="z0">🌐 Bed Roughness Parameter (\( z_0 \)) [m]:</label>
+                        <input type="number" id="z0" value="1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="uz">🌪️ Velocity at height \( z \) (\( U(z) \)) [m/s]:</label>
+                        <input type="number" id="uz" value="0.279" required>
+                    </div>
+                    <button type="button" class="btn btn-primary" onclick="calculate()">Calculate</button>
+                </form>
+            </div>
+
+            <!-- Results Section -->
+            <div class="card results-card">
+                <h2>Results</h2>
+                <div id="results-output">
+                    <p>Results will appear here after calculation.</p>
+                </div>
+                <canvas id="results-chart" width="400" height="200"></canvas>
+            </div>
+
+            <!-- Mathematical Equations -->
+            <div class="card equations-card">
+                <h2>Mathematical Equations</h2>
+                <p>\[
+                    \tau_b = \rho u_*^2
+                \]</p>
+                <p>\[
+                    u_* = \frac{k \cdot U(z)}{\ln \left( \frac{z}{z_0} \right)}
+                \]</p>
+                <p>\[
+                    D_* = \left( \frac{g (s - 1)}{\nu^2} \right)^{1/3} d_{50}
+                \]</p>
+                <p>\[
+                    \theta = \frac{\tau_b}{g (\rho_s - \rho) d_{50}}
+                \]</p>
+                <p>\[
+                    \theta_{cr} = \frac{0.3}{1 + 1.2D_*} + 0.055 \left( 1 - e^{-0.02D_*} \right)
+                \]</p>
+                <p>\[
+                    w_s = \frac{\nu}{d_{50}} \left( \sqrt{10.36 + 1.049D_*^3} - 10.36 \right)
+                \]</p>
+            </div>
+        </main>
+
+        <footer>
+            <p>© 2024 Shield Parameter Calculator. Designed for Coastal and Marine Studies.</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
